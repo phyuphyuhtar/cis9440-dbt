@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: nyc_raw
+    database: phyuphyuhtar-cis9440
+    schema: nyc_project_raw_data
+    tables:
+      - name: source_service_requests_dot
+      - name: source_motor_vehicle_collisions_2025
+      
