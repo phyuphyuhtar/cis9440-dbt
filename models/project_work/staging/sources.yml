@@ -2,6 +2,9 @@ version: 2
 
 sources:
   - name: nyc_raw
+        description: |
+        NYC 311 service requests for Dept of Transportation.
+        One row per service request.
     database: phyuphyuhtar-cis9440
     schema: nyc_project_raw_data
     tables:
