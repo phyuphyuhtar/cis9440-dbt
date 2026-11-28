@@ -2,12 +2,13 @@ version: 2
 
 sources:
   - name: nyc_raw
-        description: |
-        NYC 311 service requests for Dept of Transportation.
-        One row per service request.
+    description: Raw data loaded from NYC Open Data
     database: phyuphyuhtar-cis9440
     schema: nyc_project_raw_data
     tables:
       - name: source_service_requests_dot
+        description: |
+          NYC 311 service requests for Dept of Transportation.
+          One row per service request.
       - name: source_motor_vehicle_collisions_2025
       
