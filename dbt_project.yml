@@ -32,12 +32,8 @@ models:
         conformed:
           +materialized: table
 
-        second_data_source:
-          +materialized: table
-
         dot_311:
           +materialized: table
 
     warehouse:
       +enabled: false
-      
