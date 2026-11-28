@@ -40,3 +40,5 @@ models:
          dot_311:
            +materialized: table
            
+            warehouse:
+          +enabled: false
