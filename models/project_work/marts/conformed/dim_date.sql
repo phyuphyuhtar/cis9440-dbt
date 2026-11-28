@@ -1,13 +1,13 @@
-{{ config(materialized='table', schema='warehouse') }}
+{{ config(materialized='table') }}
 
 WITH source_dates AS (
-    SELECT DATE(created_at) AS full_date
-    FROM {{ ref('stg_service_requests_dot') }}
+    SELECT DATE(created_date) AS full_date
+    FROM {{ ref('stg_nyc_311_dot') }}
 
     UNION ALL
 
-    SELECT DATE(closed_at) AS full_date
-    FROM {{ ref('stg_service_requests_dot') }}
+    SELECT DATE(closed_date) AS full_date
+    FROM {{ ref('stg_nyc_311_dot') }}
 
     UNION ALL
 
@@ -32,10 +32,15 @@ SELECT
     CAST(FORMAT_DATE('%Y%m%d', full_date) AS INT64) AS date_key,
     full_date,
     EXTRACT(YEAR FROM full_date) AS year,
+    EXTRACT(QUARTER FROM full_date) AS quarter,
+    CASE
+        WHEN EXTRACT(MONTH FROM full_date) >= 7
+            THEN EXTRACT(YEAR FROM full_date) + 1
+        ELSE EXTRACT(YEAR FROM full_date)
+    END AS fiscal_year,
     EXTRACT(MONTH FROM full_date) AS month,
     FORMAT_DATE('%B', full_date) AS month_name,
     EXTRACT(DAY FROM full_date) AS day,
     FORMAT_DATE('%A', full_date) AS day_of_week,
     EXTRACT(DAYOFWEEK FROM full_date) IN (1, 7) AS is_weekend
 FROM calendar
-
